@@ -7,8 +7,9 @@ use CGI;
 my $q = CGI->new();
 my $a = $q->param('url');
 
-print $a;
+my $page = `/usr/bin/curl $a`;
 
-$page = `/usr/bin/curl http://$a`;
+$page=~s/</\&lt/g;
+$page=~s/>/\&gt/g;
 
 print $page;
